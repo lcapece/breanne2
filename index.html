@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spa Rejuvenate - Student Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8659 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .passcode-form {
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-family: inherit;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #d4af37;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .submit-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 1rem;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .college-info {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spa Rejuvenate</h1>
+        <p class="subtitle">
+            Welcome to Spa Rejuvenate. This mock website is for a Pacific College of Oriental Medicine student's final project, and is currently for demonstration only.
+        </p>
+        
+        <form class="passcode-form" onsubmit="checkPasscode(event)">
+            <div class="form-group">
+                <label for="passcode">Enter Passcode to Proceed</label>
+                <input type="password" id="passcode" name="passcode" placeholder="Enter passcode" required>
+            </div>
+            <button type="submit" class="submit-btn">Enter Website</button>
+            <div class="error-message" id="error-message">
+                Incorrect passcode. Please try again.
+            </div>
+        </form>
+        
+        <div class="college-info">
+            <p><strong>Pacific College of Oriental Medicine</strong></p>
+            <p>Student Final Project - For Educational Purposes Only</p>
+        </div>
+    </div>
+
+    <script>
+        function checkPasscode(event) {
+            event.preventDefault();
+            
+            const passcode = document.getElementById('passcode').value;
+            const errorMessage = document.getElementById('error-message');
+            
+            if (passcode === 'Bre05282003') {
+                // Redirect to the main spa website
+                window.location.href = 'spa-website.html';
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+                document.getElementById('passcode').value = '';
+                document.getElementById('passcode').focus();
+                
+                // Hide error message after 3 seconds
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Focus on passcode input when page loads
+        window.addEventListener('load', () => {
+            document.getElementById('passcode').focus();
+        });
+        
+        // Allow Enter key to submit
+        document.getElementById('passcode').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkPasscode(e);
+            }
+        });
+    </script>
+</body>
+</html>

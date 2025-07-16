@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spa Rejuvenate - Luxury Wellness Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a5f3f;
+            --accent: #d4af37;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --white: #ffffff;
+        }
+        body { font-family: Inter, sans-serif; line-height: 1.6; color: var(--dark); }
+        h1, h2, h3 { font-family: "Playfair Display", serif; font-weight: 700; }
+        
+        /* Modern Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.1); z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.8rem; color: var(--primary); font-family: "Playfair Display", serif; }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .book-btn {
+            background: var(--primary) !important; color: white !important;
+            padding: 0.7rem 1.5rem; border-radius: 50px; transition: all 0.3s;
+        }
+        .book-btn:hover { background: #2d8659 !important; transform: translateY(-2px); }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url("https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=1920&h=1080&fit=crop") center/cover;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white;
+        }
+        .hero h1 { font-size: 4rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 300; }
+        .btn {
+            padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none;
+            font-weight: 600; transition: all 0.3s; display: inline-block; margin: 0 0.5rem;
+        }
+        .btn-primary { background: var(--accent); color: var(--dark); }
+        .btn-primary:hover { background: #b8941f; transform: translateY(-3px); }
+        .btn-outline { border: 2px solid white; color: white; }
+        .btn-outline:hover { background: white; color: var(--dark); }
+        
+        /* Sections */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+        .section-header p { color: #6c757d; font-size: 1.2rem; }
+        
+        /* About Section */
+        .about { background: var(--light); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-content h2 { font-size: 3rem; color: var(--primary); margin-bottom: 1.5rem; }
+        .about-content p { color: #6c757d; margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .about-image { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .about-image img { width: 100%; height: 500px; object-fit: cover; }
+        
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .service-card {
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s; cursor: pointer;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .service-image { height: 250px; overflow: hidden; }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .service-card:hover .service-image img { transform: scale(1.1); }
+        .service-content { padding: 2rem; }
+        .service-content h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .service-price { font-size: 1.3rem; color: var(--accent); font-weight: 600; margin-bottom: 1rem; }
+        .service-content p { color: #6c757d; line-height: 1.8; }
+        
+        /* Contact Section */
+        .contact { background: var(--primary); color: white; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+        .contact-info h3 { font-size: 2rem; margin-bottom: 2rem; }
+        .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .contact-item i { font-size: 1.5rem; color: var(--accent); }
+        .contact-form {
+            background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 1rem; border: none; border-radius: 10px;
+            background: rgba(255,255,255,0.9); font-family: inherit;
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        
+        /* Footer */
+        footer { background: var(--dark); color: white; padding: 3rem 0; text-align: center; }
+        .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+        .social-links a { color: white; font-size: 1.5rem; transition: color 0.3s; }
+        .social-links a:hover { color: var(--accent); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Spa Rejuvenate</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact" class="book-btn">Book Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div>
+            <h1>Spa Rejuvenate</h1>
+            <p>Experience Tranquility & Healing Touch</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Book Your Session</a>
+                <a href="#services" class="btn btn-outline">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Welcome to Your Sanctuary</h2>
+                    <p>At Spa Rejuvenate, we believe in the transformative power of therapeutic touch. Our serene environment and expert care create the perfect escape from life daily stresses.</p>
+                    <p>With over a decade of experience, we specialize in personalized treatments that address your unique needs, promoting both physical healing and mental well-being.</p>
+                    <a href="#services" class="btn btn-primary">Discover Our Services</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=800&h=1000&fit=crop" alt="Spa interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Tailored treatments for your complete well-being</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=600&h=400&fit=crop" alt="Swedish Massage">
+                    </div>
+                    <div class="service-content">
+                        <h3>Swedish Massage</h3>
+                        <p class="service-price">$80 - $120</p>
+                        <p>Classic relaxation massage using long, flowing strokes to ease tension and improve circulation throughout your body.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=600&h=400&fit=crop" alt="Deep Tissue">
+                    </div>
+                    <div class="service-content">
+                        <h3>Deep Tissue Massage</h3>
+                        <p class="service-price">$90 - $130</p>
+                        <p>Intensive therapy targeting deeper muscle layers to release chronic tension and stubborn knots.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?w=600&h=400&fit=crop" alt="Hot Stone">
+                    </div>
+                    <div class="service-content">
+                        <h3>Hot Stone Therapy</h3>
+                        <p class="service-price">$100 - $140</p>
+                        <p>Heated volcanic stones placed on key points to melt away tension and promote deep relaxation.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&h=400&fit=crop" alt="Prenatal">
+                    </div>
+                    <div class="service-content">
+                        <h3>Prenatal Massage</h3>
+                        <p class="service-price">$85 - $125</p>
+                        <p>Gentle, nurturing massage designed specifically for expecting mothers comfort and safety.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop" alt="Sports">
+                    </div>
+                    <div class="service-content">
+                        <h3>Sports Massage</h3>
+                        <p class="service-price">$85 - $125</p>
+                        <p>Targeted therapy for athletes to enhance performance, prevent injury, and speed recovery.</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600&h=400&fit=crop" alt="Aromatherapy">
+                    </div>
+                    <div class="service-content">
+                        <h3>Aromatherapy Massage</h3>
+                        <p class="service-price">$90 - $130</p>
+                        <p>Therapeutic massage enhanced with carefully selected essential oils for holistic healing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: white;">Get in Touch</h2>
+                <p style="color: rgba(255,255,255,0.8);">Ready to begin your wellness journey?</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Visit Us</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div><p>123 Wellness Way</p><p>Serenity City, SC 12345</p></div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>(555) 123-4567</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@sparejuvenate.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div><p>Mon-Fri: 9AM - 7PM</p><p>Sat: 10AM - 5PM</p><p>Sun: By appointment</p></div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Book Your Session</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Preferred date, time, and service" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Spa Rejuvenate. All rights reserved.</p>
+            <p>Professional Massage Therapy by Breanne Capece, LMT</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll("a[href^='#']").forEach(anchor => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
